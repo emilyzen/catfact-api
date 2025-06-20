@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using CsvHelper;
 using System.Text.Json;
+using dotenv.net;
 
 public class CatFact
 {
@@ -71,10 +72,12 @@ public class Program
         }
 
         // POSTing the CSV file to the FTP server
+        DotEnv.Load();
+        var envVars = DotEnv.Read();
 
         string ftpHost = "ftp://laria-net.com";
         string ftpUsername = "doctums.dev.tests@laria-net.com";
-        string ftpPassword = "pN7[Fv2oIoTa";
+        string ftpPassword = envVars["PASSWORD"];
 
         string uploadUrl = $"{ftpHost}/{Path.GetFileName(filename)}";
 

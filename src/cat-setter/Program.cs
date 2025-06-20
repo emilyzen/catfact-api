@@ -4,6 +4,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text.Json;
+using dotenv.net;
 
 public class CatFact
 {
@@ -68,7 +69,9 @@ public class MySQLConnector
     static async Task Main()
     {
         // Set login info
-        string connectionString = "Server=laria-net.com;User ID=flaria_doctumstestusr;Password=Oy.udN8]t*iC;Database=flaria_doctumstest;";
+        DotEnv.Load();
+        var envVars = DotEnv.Read();
+        string connectionString = $"Server=laria-net.com;User ID=flaria_doctumstestusr;Password={envVars["PASSWORD"]};Database=flaria_doctumstest;";
 
         // Create connection
         var connection = new MySqlConnection(connectionString);
